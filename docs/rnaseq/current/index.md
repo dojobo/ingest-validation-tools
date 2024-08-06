@@ -44,7 +44,7 @@ For additional documentation on this dataset type, please visit [here](https://d
 
 ```mermaid
 ---
-title: RNAseq directory schema
+title: RNAseq directory schema (Version 2.0)
 ---
 flowchart LR
     root["`**.**

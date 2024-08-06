@@ -53,7 +53,7 @@ flowchart LR
     fastq --> RNA["`**RNA/**`"]
     RNA --> gz["`**…_R… .fastq.gz**`"]
     ex --> expected["`expected_cell_count.txt
-    *optional*"]:::opt
+    *optional*`"]:::opt
     classDef default fill:#FFFFFF,color:#000;
     classDef opt fill:#E9E9E9,color:#000;
 ```

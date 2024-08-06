@@ -42,3 +42,18 @@ For additional documentation on this dataset type, please visit [here](https://d
 | <code>raw\/fastq\/RNA\/[^\/]+_R[^\/]+\.fastq\.gz</code> | ✓ | This is a GZip'd version of the forward and reverse fastq files from RNAseq sequencing (R1 and R2). |
 | <code>lab_processed\/.*</code> |  | Experiment files that were processed by the lab generating the data. |
 
+```mermaid
+---
+title: RNAseq directory schema
+---
+flowchart LR
+    root["`**.**
+    *(root directory in globus)*`"] --> am["`**rnaseq_metadata.tsv**`"] & c["`**contributors.tsv**`"] & ex["`**extras/**`"] & lp["`**lab_processed/**`"] & raw["`**raw/**`"]
+    raw --> fastq["`**fastq/**`"]
+    fastq --> RNA["`**RNA/**`"]
+    RNA --> gz["`**…_R… .fastq.gz**`"]
+    ex --> expected["expected_cell_count.txt
+    *optional*"]:::opt
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

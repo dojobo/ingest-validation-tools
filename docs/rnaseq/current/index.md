@@ -48,7 +48,8 @@ title: RNAseq directory schema
 ---
 flowchart LR
     root["`**.**
-    *(root directory in globus)*`"] --> am["`**rnaseq_metadata.tsv**`"] & c["`**contributors.tsv**`"] & ex["`**extras/**`"] & lp["`**lab_processed/**`"] & raw["`**raw/**`"]
+    *(root directory in globus)*`"] --> am["`**rnaseq_metadata.tsv**`"] & c["`**contributors.tsv**`"] & ex["`**extras/**`"] & lp["`lab_processed/
+    *optional*`"]:::opt & raw["`**raw/**`"]
     raw --> fastq["`**fastq/**`"]
     fastq --> RNA["`**RNA/**`"]
     RNA --> gz["`**…_R… .fastq.gz**`"]

@@ -45,3 +45,42 @@ Related files:
 | <code>lab_processed\/QC_results\/.*</code> |  | Output file resulting from QC analysis. |
 | <code>lab_processed\/QC_results\/[^\/]+\.txt</code> |  | A list of metrics with the score of the current dataset that shows the quality of data collection. |
 
+```mermaid
+---
+title: LC-MS (Liquid chromatography mass spectrometry) directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**lcms_metadata.tsv**`"]
+    root --> c["`**contributors.tsv**`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mss["`mass-spec_environment.json
+    *or* mass-spec_environment.tsv
+    *optional*`"]:::opt
+    
+    
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> idsr[/"`**ID_search_results/**`"/]
+    idsr --> idsrcsv["`**… .csv**`"]
+    lp --> idm[/"`**ID_metadata/**`"/]
+    idm --> idmcsv["`**… .csv**`"]
+    lp --> qc[/"`QC_results
+    *optional*`"/]:::opt
+    qc --> qctxt["`… .txt
+    *optional*`"]:::opt
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> rawfile["`**… .raw**`"]
+    raw --> mzml["`**… .mzML**
+    *or* **… .d**`"]
+    
+    root --> drv[/"`**drv_…/**`"/]
+
+    root--> nav["`…NAV… .tif
+    … .pdf
+    *optional*`"]:::opt
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

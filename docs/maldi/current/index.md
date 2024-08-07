@@ -47,3 +47,37 @@ Related files:
 | <code>lab_processed\/annotations\/.*</code> | ✓ | Directory containing annotations |
 | <code>lab_processed\/annotations\/[^\/]+_MolecularAssignments\.tsv</code> | ✓ | TSV file containing the m/z, molecular assignment, etc. |
 
+```mermaid
+---
+title: MALDI directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**maldi_metadata.tsv**`"]
+    root --> c["`**contributors.tsv**`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mse["`mass-spec_environment.json
+    *or* mass-spec_environment.csv
+    *optional*`"]:::opt
+    
+    
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> chan["`**…ome-tiff.channels.csv**`"]
+    lpi --> ometiffp["`**… .ome.tiff**`"]
+    lp --> trans[/"`transformations/
+    *optional*`"/]:::opt
+    trans --> transt["`… .txt
+    *optional*`"]:::opt
+    lp --> ann[/"`**annotations/**`"/]
+    ann --> ma["`**… _MolecularAssignments.tsv**`"]
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> rawi[/"`**imzML/**`"/]
+    rawi --> ibd["`**… .ibd**`"]
+    rawi --> imzml["`**… .imzML**`"]
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

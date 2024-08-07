@@ -61,3 +61,56 @@ This schema is for autofluorescence (AF). For an example of an AF dataset & dire
 | <code>lab_processed\/annotations\/regions-of-concern\.csv</code> |  | This file and the associated GeoJSON file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain one row per region and include documentation about the region and why it's being flagged. | lab_processed\/annotations\/.* |
 | <code>lab_processed\/annotations\/regions-of-concern\.geojson</code> |  | This file and the associated CSV file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain the geometric coordinates of each region being flagged. | lab_processed\/annotations\/.* |
 
+```mermaid
+---
+title: Auto-fluorescence (AF) directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**af_metadata.tsv**`"]
+    root --> c["`**contributors.tsv**`"] 
+
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mshw["`**microscope_hardware.json**`"]
+    ex --> mss["`microscope_settings.json
+    *optional*`"]:::opt
+    
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> omechan["`**…ome-tiff.channels.csv**`"]
+    lp --> trans[/"`transformations/
+    *optional*`"/]:::opt
+    trans --> transtxt["`… .txt
+    *optional*`"]:::opt
+    lp --> ann[/"`annotations/
+    *optional*`"/]:::opt --> annfiles["`*any / all:*
+    … .segmentations.ome.tiff
+    segmentation-masks.csv
+    … -objects.csv
+    … .geojson
+    tissue-boundary.geojson
+    regions-of-concern.csv
+    regions-of-concern.geojson
+    *optional*`"]:::opt
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> chan["`**channel_layout.tsv**`"]
+    raw --> rawi[/"`**images/**`"/]
+    rawi --> tiff["`**… .tiff**
+    *or* .czi, .lif, .nd2, .oir, .xml`"]
+
+    root --> qaqc[/"`**qa_qc/**`"/]
+    qaqc --> res[/"`**resolution_report/**`"/]
+    res --> resfile["`resolution.txt
+    *or* … .pdf
+    *optional*`"]:::opt
+
+    qaqc --> ill[/"`**illumination_report/**`"/]
+    ill --> illfile["`illumination.txt
+    *or* … .pdf
+    *optional*`"]:::opt
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

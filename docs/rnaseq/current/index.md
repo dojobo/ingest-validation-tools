@@ -47,11 +47,11 @@ For additional documentation on this dataset type, please visit [here](https://d
 title: RNAseq directory schema (Version 2.0)
 ---
 flowchart LR
-    root["`**.**
-    *(root directory in globus)*`"] --> am["`**rnaseq_metadata.tsv**`"] & c["`**contributors.tsv**`"] & ex["`**extras/**`"] & lp["`lab_processed/
-    *optional*`"]:::opt & raw["`**raw/**`"]
-    raw --> fastq["`**fastq/**`"]
-    fastq --> RNA["`**RNA/**`"]
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> am["`**rnaseq_metadata.tsv**`"] & c["`**contributors.tsv**`"] & ex[/"`**extras/**`"/] & lp[/"`lab_processed/
+    *optional*`"/]:::opt & raw[/"`**raw/**`"/]
+    raw --> fastq[/"`**fastq/**`"/]
+    fastq --> RNA[/"`**RNA/**`"/]
     RNA --> gz["`**…_R… .fastq.gz**`"]
     ex --> expected["`expected_cell_count.txt
     *optional*`"]:::opt

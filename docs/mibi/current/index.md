@@ -43,3 +43,34 @@ Related files:
 | <code>lab_processed\/images\/[^\/]+\.ome\.tiff</code> | ✓ | OME-TIFF file (multichannel, multi-layered) produced by the experiment. If compressed, must use loss-less compression algorithm. See the following link for the set of fields that are required in the OME TIFF file XML header. <https://docs.google.com/spreadsheets/d/1YnmdTAA0Z9MKN3OjR3Sca8pz-LNQll91wdQoRPSP6Q4/edit#gid=0> |
 | <code>lab_processed\/images\/[^\/]*ome-tiff\.channels\.csv</code> | ✓ | This file provides essential documentation pertaining to each channel of the accommpanying OME TIFF. The file should contain one row per OME TIFF channel. The required fields are detailed <https://docs.google.com/spreadsheets/d/1xEJSb0xn5C5fB3k62pj1CyHNybpt4-YtvUs5SUMS44o/edit#gid=0> |
 
+```mermaid
+---
+title: MIBI (multiplex ion beam imaging) directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**mibi_metadata.tsv**`"]
+    root --> c["`**contributors.tsv**`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+    ex --> hw["`**hardware.json**`"]
+    
+    
+    root --> lp[/"`**lab_processed/**`"/]
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> rawi[/"`**images/**`"/]
+    rawi --> ometiff["`**… .ome.tiff**`"]
+    rawi --> chan["`**…ome-tiff.channels.csv**`"]
+    rawi --> tiles["`tiles.csv
+    *optional*`"]:::opt
+    
+    root --> drv[/"`**drv_…/**`"/]
+
+    root--> nav["`…NAV… .tif
+    … .pdf
+    *optional*`"]:::opt
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

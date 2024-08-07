@@ -42,3 +42,31 @@ REQUIRED - For this assay, you must also prepare and submit two additional metad
 | <code>raw\/fastq\/ATAC\/[^\/]+_R[^\/]+\.fastq\.gz</code> | ✓ | This is a GZip'd version of the fastq files containing the forward, reverse and barcode reads from ATACseq sequencing (R1, R2 and R3). Further, if the barcodes are in R3 (as with 10X) then the metadata field "barcode reads" would be set to "Read 2 (R2)" and the fastq file named "*_R2*fastq.gz" would be expected. |
 | <code>lab_processed\/.*</code> |  | Experiment files that were processed by the lab generating the data. |
 
+```mermaid
+---
+title: 10x Multiome directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**10x-multiome_metadata.tsv**`"]
+    root --> rmeta["`**rnaseq_metadata.tsv**`"] 
+    root --> ameta["`**atacseq_metadata.tsv**`"]
+    root --> c["`**contributors.tsv**`"] 
+
+    root --> ex[/"`**extras/**`"/] 
+    ex --> expected["`expected_cell_count.txt
+    *optional*`"]:::opt
+    
+    root --> lp[/"`lab_processed/
+    *optional*`"/]:::opt 
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> fastq[/"`**fastq/**`"/]
+    fastq --> rna[/"`**RNA/**`"/]
+    rna --> rgz["`**…_R… .fastq.gz**`"]
+    fastq --> atac[/"`**ATAC/**`"/]
+    atac --> agz["`**…_R… .fastq.gz**`"]
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

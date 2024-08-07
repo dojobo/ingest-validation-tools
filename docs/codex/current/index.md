@@ -92,8 +92,8 @@ flowchart LR
     raw --> dataset["`**dataset.json**`"]
     raw --> cyc[/"`**cyc…_reg…/**`"/]
     cyc --> tif["`**…_z…_CH… .tif**`"]
-    raw --> src[/"`**src_…/**`"/]
-    src --> gcid[/"`cyc…_reg…_…/
+    raw --> src[/"`**src_ …/**`"/]
+    src --> gcid[/"`cyc…_reg… _…/
     *optional*`"/]:::opt
     gcid --> gci["`… .gci
     *optional*`"]:::opt

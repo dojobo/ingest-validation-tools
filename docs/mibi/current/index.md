@@ -57,18 +57,14 @@ flowchart LR
     
     
     root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> chan["`**…ome-tiff.channels.csv**`"]
+    lpi --> ometiffp["`**… .ome.tiff**`"]
     
     root --> raw[/"`**raw/**`"/]
     raw --> rawi[/"`**images/**`"/]
-    rawi --> ometiff["`**… .ome.tiff**`"]
-    rawi --> chan["`**…ome-tiff.channels.csv**`"]
+    rawi --> ometiffr["`**… .ome.tiff**`"]
     rawi --> tiles["`tiles.csv
-    *optional*`"]:::opt
-    
-    root --> drv[/"`**drv_…/**`"/]
-
-    root--> nav["`…NAV… .tif
-    … .pdf
     *optional*`"]:::opt
     
     classDef default fill:#FFFFFF,color:#000;

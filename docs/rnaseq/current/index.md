@@ -48,13 +48,21 @@ title: RNAseq directory schema (Version 2.0)
 ---
 flowchart LR
     root[/"`**.**
-    *(root directory in globus)*`"/] --> am["`**rnaseq_metadata.tsv**`"] & c["`**contributors.tsv**`"] & ex[/"`**extras/**`"/] & lp[/"`lab_processed/
-    *optional*`"/]:::opt & raw[/"`**raw/**`"/]
+    *(root directory in globus)*`"/] --> am["`**rnaseq_metadata.tsv**`"] 
+    root --> c["`**contributors.tsv**`"] 
+
+    root --> ex[/"`**extras/**`"/] 
+    ex --> expected["`expected_cell_count.txt
+    *optional*`"]:::opt
+    
+    root --> lp[/"`lab_processed/
+    *optional*`"/]:::opt 
+    
+    root --> raw[/"`**raw/**`"/]
     raw --> fastq[/"`**fastq/**`"/]
     fastq --> RNA[/"`**RNA/**`"/]
     RNA --> gz["`**…_R… .fastq.gz**`"]
-    ex --> expected["`expected_cell_count.txt
-    *optional*`"]:::opt
+    
     classDef default fill:#FFFFFF,color:#000;
     classDef opt fill:#E9E9E9,color:#000;
 ```

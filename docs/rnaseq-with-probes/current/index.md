@@ -42,3 +42,31 @@ For additional documentation on this dataset type, please visit [here](https://d
 | <code>raw\/fastq\/oligo\/[^\/]+_R[^\/]+\.fastq\.gz</code> | ✓ | This is a gzip version of the fastq file. This file contains the cell barcode and unique molecular identifier (technical). |
 | <code>lab_processed\/.*</code> |  | Experiment files that were processed by the lab generating the data. |
 
+```mermaid
+---
+title: RNAseq (with probes) directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**rnaseq-with-probes_metadata.tsv**`"] 
+    root --> c["`**contributors.tsv**`"] 
+
+    root --> ex[/"`**extras/**`"/] 
+    ex --> expected["`expected_cell_count.txt
+    *optional*`"]:::opt
+    
+    root --> lp[/"`lab_processed/
+    *optional*`"/]:::opt 
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> fastq[/"`**fastq/**`"/]
+    fastq --> oligo[/"`**oligo/**`"/]
+    oligo --> gz["`**…_R… .fastq.gz**`"]
+    raw --> custom["`custom_probe_set.csv
+    *and / or*
+    additional_panels_used.csv
+    *optional*`"]:::opt
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

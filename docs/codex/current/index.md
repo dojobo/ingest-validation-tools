@@ -58,3 +58,55 @@ Related files:
 | <code>raw\/reg_[^\/]*\.png</code> (example: <code>raw/reg_00.png</code>) |  | Region overviews |  |
 | <code>raw\/experiment\.json</code> (example: <code>raw/experiment.json</code>) |  | JSON file produced by the Akoya software which contains the metadata for the experiment, including the software version used, microscope parameters, channel names, pixel dimensions, etc. (required for HuBMAP pipeline) |  |
 
+```mermaid
+---
+title: CODEX directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**codex_metadata.tsv**`"]
+    root --> c["`**contributors.tsv**`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mshw["`**microscope_hardware.json**`"]
+    ex --> dirs["`**dir-schema-v2-with-dataset-json**`"]
+    ex --> mss["`microscope_settings.json
+    *optional*`"]:::opt
+    
+    
+    root --> lp[/"`**lab_processed/**`"/] --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> chan["`**… ome-tiff.channels.csv**`"]
+    lp --> ann[/"`annotations/
+    *optional*`"/]:::opt --> annfiles["`*any / all:*
+    … .segmentations.ome.tiff
+    segmentation-masks.csv
+    … -objects.csv
+    … .geojson
+    tissue-boundary.geojson
+    regions-of-concern.csv
+    regions-of-concern.geojson
+    *optional*`"]:::opt
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> dataset["`**dataset.json**`"]
+    raw --> cyc[/"`**cyc…_reg…/**`"/]
+    cyc --> tif["`**…_z…_CH… .tif**`"]
+    raw --> src[/"`**src_…/**`"/]
+    src --> gcid[/"`cyc…_reg…_…/
+    *optional*`"/]:::opt
+    gcid --> gci["`… .gci
+    *optional*`"]:::opt
+    raw --> png["`reg_… .png
+    experiment.json
+    *optional*`"]:::opt
+    
+    root --> drv[/"`**drv_…/**`"/]
+
+    root--> nav["`…NAV… .tif
+    … .pdf
+    *optional*`"]:::opt
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

@@ -47,3 +47,35 @@ Related files:
 | <code>lab_processed\/annotations\/.*</code> | ✓ | Directory containing annotations |
 | <code>lab_processed\/annotations\/[^\/]+_MolecularAssignments\.tsv</code> | ✓ | TSV file containing the m/z, molecular assignment, etc. |
 
+```mermaid
+---
+title: Desorption electrospray ionization (DESI) directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**desi_metadata.tsv**`"]
+    root --> c["`**contributors.tsv**`"] 
+
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mse["`mass-spec_environment.json
+    *or* mass-spec_environment.tsv
+    *optional*`"]:::opt
+    
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> omechan["`**…ome-tiff.channels.csv**`"]
+    lp --> trans[/"`transformations/
+    *optional*`"/]:::opt
+    trans --> transtxt["`… .txt
+    *optional*`"]:::opt
+    lp --> ann[/"`**annotations/**`"/] --> annfiles["`**…_MolecularAssignments.tsv**`"]
+    
+    root --> raw[/"`**raw/**`"/]
+    raw --> imzml[/"`**imzML**`"/]
+    imzml --> ibd["`**… .ibd**`"]
+    imzml --> imz["`**… .imzML**`"]
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

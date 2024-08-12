@@ -42,3 +42,30 @@ Related files:
 | <code>lab_processed\/fastq\/RNA\/.*</code> | ✓ | Directory containing fastq files pertaining to RNAseq sequencing. |
 | <code>lab_processed\/fastq\/RNA\/[^\/]+\.fastq\.gz</code> | ✓ | This is a GZip'd version of the forward and reverse fastq files from RNAseq sequencing (R1 and R2). |
 
+```mermaid
+---
+title: MUSIC directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**music_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> fastq[/"`**fastq/**`"/]
+    fastq --> gz["`**…_R… .fastq.gz**`"]
+
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpfastq[/"`**fastq/**`"/]
+    lpfastq --> dna[/"`**DNA/**`"/]
+    dna --> dnagz["`**… .fastq.gz**`"]
+    lpfastq --> rna[/"`**RNA/**`"/]
+    rna --> rnagz["`**… .fastq.gz**`"]
+
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

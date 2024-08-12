@@ -63,3 +63,61 @@ Related files:
 | <code>lab_processed\/annotations\/regions-of-concern\.csv</code> |  | This file and the associated GeoJSON file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain one row per region and include documentation about the region and why it's being flagged. | lab_processed\/annotations\/.* |
 | <code>lab_processed\/annotations\/regions-of-concern\.geojson</code> |  | This file and the associated CSV file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain the geometric coordinates of each region being flagged. | lab_processed\/annotations\/.* |
 
+```mermaid
+---
+title: Second Harmonic Generation directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**second-harmonic-generation_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/]
+    ex --> mshw["`**microscope_hardware.json**`"]
+    ex --> mss["`microscope_settings.json
+    *optional*`"]:::opt
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> chan["`**channel_layout.tsv**`"]
+    raw --> lpc["`lightpath_configuration.tsv
+    *and / or*
+    fingerprint_layout.tsv
+    *optional*`"]:::opt
+    raw --> rawi[/"`**images/**`"/]
+    rawi --> tiff["`**… .tiff**
+    *and/or* .czi, .lif, .nd2, .oir, .xml`"]
+
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> ometiffc["`**…ome-tiff.channels.csv**`"]
+    lp --> trans[/"`transformations/
+    *optional*`"/]:::opt
+    trans --> txt["`… .txt
+    *optional*`"]:::opt
+    lp --> ann[/"`annotations/
+    *optional*`"/]:::opt --> annfiles["`*any / all:*
+    … .segmentations.ome.tiff
+    segmentation-masks.csv
+    … -objects.csv
+    … .geojson
+    tissue-boundary.geojson
+    regions-of-concern.csv
+    regions-of-concern.geojson
+    *optional*`"]:::opt
+
+    root --> qa_qc[/"`**qa_qc/**`"/]
+    qa_qc --> rr[/"`**resolution_report/**`"/]
+    rr --> rrfile["`resolution.txt
+    *or* … .pdf
+    *optional*`"]:::opt
+    qa_qc --> ir[/"`**illumination_report/**`"/]
+    ir --> irfile["`illumination.txt
+    *or* … .pdf
+    *optional*`"]:::opt
+
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

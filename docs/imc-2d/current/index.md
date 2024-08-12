@@ -52,3 +52,41 @@ Related files:
 | <code>lab_processed\/annotations\/regions-of-concern\.csv</code> |  | This file and the associated GeoJSON file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain one row per region and include documentation about the region and why it's being flagged. | lab_processed\/annotations\/.* |
 | <code>lab_processed\/annotations\/regions-of-concern\.geojson</code> |  | This file and the associated CSV file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain the geometric coordinates of each region being flagged. | lab_processed\/annotations\/.* |
 
+```mermaid
+---
+title: 2D Imaging Mass Cytometry directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**imc-2d_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mshw["`**… .hardware.json**`"] 
+    
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> omechan["`**…ome-tiff.channels.csv**`"]
+    lp --> ann[/"`annotations/
+    *optional*`"/]:::opt --> annfiles["`*any / all:*
+    … .segmentations.ome.tiff
+    segmentation-masks.csv
+    … -objects.csv
+    … .geojson
+    tissue-boundary.geojson
+    regions-of-concern.csv
+    regions-of-concern.geojson
+    *optional*`"]:::opt
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> rawi[/"`**images/**`"/]
+    rawi --> mcd["`**… .mcd**`"]
+    rawi --> tiff["`**… .tiff**`"]
+    rawi --> tiles["`**tiles.csv**`"]
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

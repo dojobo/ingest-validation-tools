@@ -44,3 +44,32 @@ Related files:
 | <code>raw\/Spatial_barcodes\/[^\/]+\.mtx</code> | ✓ | The raw count matrix (reads per spot that map to each gene:spot x gene). |
 | <code>raw\/Spatial_barcodes\/[^\/]+\.spo</code> | ✓ | The spatial coordinates for each spot. |
 
+```mermaid
+---
+title: HiFi-Slide directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**hifi-slide_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mshw["`**microscope_hardware.json**`"] 
+    ex --> mssettings["`microscope_settings.json
+    *optional*`"]:::opt
+        
+    root --> raw[/"`**raw/**`"/]
+    raw --> fastq[/"`**fastq/**`"/]
+    fastq --> RNA[/"`**RNA/**`"/]
+    RNA --> gz["`**…_R… .fastq.gz**`"]
+
+    raw --> spaba[/"`**Spatial_barcodes/**`"/]
+    spaba --> gene["`**… .gene**`"]
+    spaba --> mtx["`**… .mtx**`"]
+    spaba --> spo["`**… .spo**`"]
+    
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

@@ -76,6 +76,11 @@ flowchart LR
     raw --> pos["`**positions.csv**`"]
     raw --> do["`**dataorganization.csv**`"]
     raw --> dax["`**… .DAX**`"]
+    raw --> apu["`*any / all of:*
+    additional_panels_used.csv
+    custom_probe_set.csv
+    micron_to_mosaic_pixel_transform.csv
+    *optional*`"]:::opt
     raw --> rawi[/"`**images/**`"/]
     rawi --> tiff["`**… .tif**`"]
 

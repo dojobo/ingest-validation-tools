@@ -91,3 +91,57 @@ REQUIRED - For this assay, you must also prepare and submit two additional metad
 | <code>lab_processed\/annotations\/regions-of-concern\.csv</code> |  | This file and the associated GeoJSON file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain one row per region and include documentation about the region and why it's being flagged. | lab_processed\/annotations\/.* |
 | <code>lab_processed\/annotations\/regions-of-concern\.geojson</code> |  | This file and the associated CSV file can be used to denote any regions in the image that may contain QA/QC concerns. For example, if there are folds in the tissue, the region of the fold can be highlighted. This file should contain the geometric coordinates of each region being flagged. | lab_processed\/annotations\/.* |
 
+```mermaid
+---
+title: Visium (with probes) directory schema (Version 2.1)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**visium-with-probes_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/]
+    ex --> mshw["`**microscope_hardware.json**`"]
+    ex --> mss["`microscope_settings.json
+    *optional*`"]:::opt
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> gpr["`**… .gpr**`"]
+    raw --> apu["`additional_panels_used.csv
+    *and / or*
+    custom_probe_set.csv
+    *optional*`"]:::opt
+    raw --> rawfq[/"`**fastq/**`"/]
+    rawfq --> oligo[/"`**oligo/**`"/]
+    oligo --> oligofq["`**… .fastq.gz**`"]
+    raw --> rawi[/"`**images/**`"/]
+    rawi --> rawtiff["`**… _fiducial.tiff** *or* .tif`"]
+    rawi --> rawetc["`… _tissue.tiff *or* .tif 
+    *and / or* 
+    … .ndpi
+    *optional*`"]:::opt
+
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> ometiffc["`**…ome-tiff.channels.csv**`"]
+    lp --> trans[/"`transformations/
+    *optional*`"/]:::opt
+    trans --> txt["`… .txt
+    *optional*`"]:::opt
+    lp --> ann[/"`annotations/
+    *optional*`"/]:::opt --> annfiles["`*any / all:*
+    … .segmentations.ome.tiff
+    segmentation-masks.csv
+    … -objects.csv
+    … .geojson
+    tissue-boundary.geojson
+    regions-of-concern.csv
+    regions-of-concern.geojson
+    *optional*`"]:::opt
+
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

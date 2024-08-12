@@ -49,3 +49,48 @@ Related files:
 | <code>lab_processed\/images\/[^\/]+tissue-boundary\.geojson</code> |  | **[QA/QC]** If the boundaries of the tissue have been identified (e.g., by manual efforts), then the boundary geometry can be included as a GeoJSON file named “*.tissue-boundary.geojson”. |
 | <code>lab_processed\/images\/[^\/]*qptiff\.channels\.csv</code> | ✓ | This file provides essential documentation pertaining to each channel of the accommpanying QPTIFF. The file should contain one row per QPTIFF channel. The required fields are detailed <https://docs.google.com/spreadsheets/d/1JikzRNyDErspgPSel4P9Y6gx6N_mrAGIMDcJZd8TucA/edit#gid=0> |
 
+```mermaid
+---
+title: PhenoCycler directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**phenocycler_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> rawi[/"`**images/**`"/]
+    rawi --> xpd["`**… .xpd**`"]
+    rawi --> qptiff["`**… .qptiff**`"]
+    rawi --> phe[/"`**phenocycler/**`"/]
+    phe --> pheqptiff["`**… .qptiff.raw**`"]
+    phe --> int["`… .qptiff.intermediate
+    *optional*`"]:::opt
+    phe --> etc["`*one of:*
+    **CombineInputs.txt
+    FocusMap.tif
+    FocusTable.txt
+    Label.tif
+    MarkerList.txt
+    OverviewBF.tif
+    SampleMask.tif**`"]
+    phe --> etco["`*any / all of:*
+    CoverslipMask.tif
+    FlowCellOverview.tif
+    OverviewFL.tif
+    SampleValMask.tif
+    *optional*`"]:::opt
+
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> chan["`**…qptiff.channels.csv**`"]
+    lpi --> tb["`tissue-boundary.geojson
+    *optional*`"]:::opt
+
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

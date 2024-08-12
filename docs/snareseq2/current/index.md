@@ -42,3 +42,32 @@ Related files:
 | <code>raw\/fastq\/ATAC\/[^\/]+_R[^\/]+\.fastq\.gz</code> | ✓ | This is a GZip'd version of the fastq files containing the forward, reverse and barcode reads from ATACseq sequencing (R1, R2 and R3). Further, if the barcodes are in R3 (as with 10X) then the metadata field "barcode reads" would be set to "Read 2 (R2)" and the fastq file named "*_R2*fastq.gz" would be expected. |
 | <code>lab_processed\/.*</code> |  | Experiment files that were processed by the lab generating the data. |
 
+```mermaid
+---
+title: SNARE-seq2 directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**snareseq2_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/]
+    ex --> ecc["`expected_cell_count.csv
+    *optional*`"]:::opt
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> fastq[/"`**fastq/**`"/] 
+    fastq --> atac[/"`**ATAC/**`"/]
+    atac --> atacgz["`**… _R… .fastq.gz**`"]
+    fastq --> rna[/"`**RNA/**`"/]
+    rna --> rnagz["`**… _R… .fastq.gz**`"]
+
+
+    root --> lp[/"`lab_processed/
+    *optional*`"/]:::opt
+
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```

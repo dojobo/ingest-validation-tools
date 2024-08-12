@@ -53,6 +53,42 @@ Related files:
 | <code>lab_processed\/images\/[^\/]+\.ome\.tiff</code> (example: <code>lab_processed/images/HBM892.MDXS.293.ome.tiff</code>) | ✓ | OME-TIFF files (multichannel, multi-layered) produced by the microscopy experiment. If compressed, must use loss-less compression algorithm. For Visium this stitched file should only include the single capture area relevant to the current dataset. For GeoMx there will be one OME TIFF file per slide, with each slide including multiple AOIs. See the following link for the set of fields that are required in the OME TIFF file XML header. <https://docs.google.com/spreadsheets/d/1YnmdTAA0Z9MKN3OjR3Sca8pz-LNQll91wdQoRPSP6Q4/edit#gid=0> |
 | <code>lab_processed\/images\/[^\/]*ome-tiff\.channels\.csv</code> | ✓ | This file provides essential documentation pertaining to each channel of the accommpanying OME TIFF. The file should contain one row per OME TIFF channel. The required fields are detailed <https://docs.google.com/spreadsheets/d/1xEJSb0xn5C5fB3k62pj1CyHNybpt4-YtvUs5SUMS44o/edit#gid=0> |
 
+```mermaid
+---
+title: MERFISH directory schema (Version 2.2)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**merfish_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/] 
+    ex --> mshw["`**microscope_hardware.json**`"]
+    ex --> mss["`microscope_settings.json
+    *optional*`"]:::opt
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> gp["`**gene_panel.csv**`"]
+    raw --> man["`**manifest.json**`"]
+    raw --> cb["`**codebook.csv**`"]
+    raw --> pos["`**positions.csv**`"]
+    raw --> do["`**dataorganization.csv**`"]
+    raw --> dax["`**… .DAX**`"]
+    raw --> rawi[/"`**images/**`"/]
+    rawi --> tiff["`**… .tif**`"]
+
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> dt["`**detected_transcripts.csv**`"]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> omechan["`**…ome-tiff.channels.csv**`"]
+
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```
+
 <summary><b>Version 2.1</b></summary>
 
 | pattern | required? | description |

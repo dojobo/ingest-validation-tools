@@ -47,3 +47,38 @@ Related files:
 | <code>lab_processed\/annotations\/.*</code> | ✓ | Directory containing annotations |
 | <code>lab_processed\/annotations\/[^\/]+_MolecularAssignments\.tsv</code> | ✓ | TSV file containing the m/z, molecular assignment, etc. |
 
+```mermaid
+---
+title: SIMS directory schema (Version 2.0)
+---
+flowchart LR
+    root[/"`**.**
+    *(root directory in globus)*`"/] --> meta["`**sims_metadata.tsv**
+    *may be reorganized from upload*`"]
+    root --> c["`**contributors.tsv**
+    *may be reorganized from upload*`"]
+    
+    root --> ex[/"`**extras/**`"/]
+    ex --> mss["`mass-spec_environment.json
+    *or* mass-spec_environment.tsv
+    *optional*`"]:::opt
+
+    root --> raw[/"`**raw/**`"/]
+    raw --> imzml[/"`**imzML/**`"/]
+    imzml --> ibd["`**… .ibd**`"]
+    imzml --> imzmlfile["`**… .imzML**`"]
+
+    root --> lp[/"`**lab_processed/**`"/]
+    lp --> lpi[/"`**images/**`"/]
+    lpi --> ometiff["`**… .ome.tiff**`"]
+    lpi --> ometiffc["`**…ome-tiff.channels.csv**`"]
+    lp --> trans[/"`transformations/
+    *optional*`"/]:::opt
+    trans --> txt["`… .txt
+    *optional*`"]:::opt
+    lp --> ann[/"`**annotations/**`"/]
+    ann --> ma["`**… _MolecularAssignments.tsv**`"]
+
+    classDef default fill:#FFFFFF,color:#000;
+    classDef opt fill:#E9E9E9,color:#000;
+```
